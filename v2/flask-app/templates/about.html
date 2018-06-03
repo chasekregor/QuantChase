@@ -2,8 +2,54 @@
 <html>
 <title>About</title>
 
+
+<div class = "aboutbar">
+<h1><a href="http://127.0.0.1:5000/" style="color: black; text-decoration: none;">Quantified Chase</a></h1>
+<button class = "aboutbutton"><a href="http://127.0.0.1:5000/about" style="color: black; text-decoration: none;">About</a></button>
+</div>
+
+<style>
+.aboutbar {
+  text-align: center;
+}
+.aboutbutton {
+    border-radius: 12px;
+    background-color: white; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+</style>
+
 <body>
-<iframe height='160' width='300' frameborder='0' allowtransparency='true' scrolling='no' src='https://www.strava.com/athletes/3623618/activity-summary/02e43e83aaa3e8989fa8ed4d921c4db8396bfa42'></iframe>
+  <h3>Creator:</h3>
+  <p>Chase Kregor</p>
+  <h3>Goal:</h3>
+  <p>The goal of Quantified Chase was to create a dashboard of my life.</p>
+  <h3>Background:</h3>
+  <p>Quantified Chase was insipired by the Quantified Self movement. Upon buying an apple watch, I started to fall
+    in love with the Health App, now that I had an Apple Watch I was feeding it all this
+    interesting data about myself 24/7.
+     I wondered if there was a way I could share all this data other people? This made me think about
+     all the other various platforms that contained data about myself.
+     And so I created Quantified Chase for three reasons:
+     <ul>
+       <li>Display my data to others for accountability</li>
+       <li>Aggregate all my data for information gain</li>
+       <li>A fun data science project</li>
+     </ul>
+  </p>
+  <h3>Data:</h3>
+  <p>The data comes directly from my HealthKit.</p>
+  <p>Disclaimer: Please don't do anything innapropriate with my data.</p>
+  <h3>How Quantified Chase Works:</h3>
+  <p>Healthkit -> QSAccess App -> Flask App -> Heroku </p>
+  <h3>Next Steps & Future Work:</h3>
+
 </body>
 
 
