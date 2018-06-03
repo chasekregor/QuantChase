@@ -62,7 +62,7 @@ def get_food_chart_json():
     foodchart.plot(carbs, label='Carbs (g)', color = '#ff3b30')
     foodchart.plot(proteins, label='Proteins (g)', color = '#4cd964')
     foodchart.plot(fats, label='Fats (g)', color = '#009dff')
-    foodchart.stacked(True)
+    #foodchart.stacked(True)
     foodchart.set_xticklabels(dates)
     foodchart.ylabel('Daily Intake (g)')
     foodchart.bind_to('food_chart_div')
@@ -375,7 +375,7 @@ def get_month_sleep_chart_json():
     sleepdata = pd.read_csv('data/Sleep Analysis.csv')
     sleep = sleepdata[['In bed start','In bed Finish','Minutes in bed','Minutes asleep']]
     sleep.columns = ['Inbedstart', 'InbedFinish','Minutesinbed','Minutesasleep']
-    sleep = sleep[::-1].head(30)
+    sleep = sleep[::-1].head(31)
 
     date = []
     for i in sleep.InbedFinish:
@@ -403,7 +403,7 @@ def get_month_food_chart_json():
     #data
     data = pd.read_csv('data/Health Data.csv')
     nutrition = data[['Start','Finish','Carbohydrates (mg)','Protein (g)','Sugar (g)','Total Fat (g)','Caffeine (mg)','Dietary Calories (cal)','Resting Calories (kcal)','Dietary Water (L)']]
-    nutrition = nutrition[::-1].head(30)
+    nutrition = nutrition[::-1].head(31)
     nutrition.columns = ['Start', 'Finish','Carbohydrates','Proteins','Sugar','TotalFat','Caffeine','DietaryCalories','RestingCalories','DietaryWater']
     nutrition.Carbohydrates = nutrition.Carbohydrates * 0.001
     carbs = nutrition.Carbohydrates.tolist()
@@ -434,7 +434,7 @@ def get_month_caloric_chart_json():
     #data
     data = pd.read_csv('data/Health Data.csv')
     calories = data[['Start','Finish','Active Calories (kcal)','Resting Calories (kcal)','Dietary Calories (cal)']]
-    calories = calories[::-1].head(30)
+    calories = calories[::-1].head(31)
     calories.columns = ['Start','Finish','ActiveCalories','RestingCalories','DietaryCalories']
     calories.DietaryCalories = calories.DietaryCalories * 0.001
     calories['Net'] = calories['DietaryCalories'] - (calories['ActiveCalories'] + calories['RestingCalories'] )
@@ -463,7 +463,7 @@ def get_month_fitness_chart_json():
     #data
     data = pd.read_csv('data/Health Data.csv')
     fitness = data[['Start','Cycling Distance (mi)','Distance (mi)','Steps (count)']]
-    fitness = fitness[::-1].head(30)
+    fitness = fitness[::-1].head(31)
     fitness.columns = ['Start', 'Cycling','WalkingandRunning','Steps']
 
 
@@ -503,6 +503,7 @@ def today():
         sleep.append(i / 60)
 
     avgsleep = np.average(sleep)
+    avgsleep = round(avgsleep,1)
 
     #food
     data = pd.read_csv('data/Health Data.csv')
@@ -519,8 +520,11 @@ def today():
     fats = fats[::-1]
     dates = dates[::-1]
     avgcarbs = np.average(carbs)
+    avgcarbs = int(avgcarbs)
     avgproteins = np.average(proteins)
+    avgproteins = int(avgproteins)
     avgfats = np.average(fats)
+    avgfats = int(avgfats)
 
     #caloric
     data = pd.read_csv('data/Health Data.csv')
@@ -535,10 +539,10 @@ def today():
     net = calories.Net[::-1].tolist()
     dates = calories.Start[::-1].tolist()
 
-    avgactive = np.average(active)
-    avgresting = np.average(resting)
-    avgdietary = np.average(dietary)
-    avgnet = np.average(net)
+    avgactive = int(np.average(active))
+    avgresting = int(np.average(resting))
+    avgdietary = int(np.average(dietary))
+    avgnet = int(np.average(net))
 
     #fitness
     data = pd.read_csv('data/Health Data.csv')
@@ -546,12 +550,90 @@ def today():
     fitness = fitness[::-1].head(1)
     fitness.columns = ['Start', 'Cycling','WalkingandRunning','Steps']
     avgcycling = np.average(fitness.Cycling)
+    avgcycling = round(avgcycling,2)
     avgwalkingandrunning = np.average(fitness.WalkingandRunning)
+    avgwalkingandrunning = round(avgwalkingandrunning,2)
 
-    return render_template("today.html", sleepchart_json=sleepchart_json,foodchart_json=foodchart_json,caloricchart_json=caloricchart_json,fitnesschart_json=fitnesschart_json, avgsleep = avgsleep, avgcarbs = avgcarbs,avgproteins = avgcarbs, avgfats = avgfats, avgactive = avgactive, avgresting = avgresting, avgdietary = avgdietary, avgnet = avgnet, avgcycling = avgcycling, avgwalkingandrunning = avgwalkingandrunning)
+    return render_template("today.html", sleepchart_json=sleepchart_json,foodchart_json=foodchart_json,caloricchart_json=caloricchart_json,fitnesschart_json=fitnesschart_json, avgsleep = avgsleep, avgcarbs = avgcarbs,avgproteins = avgproteins, avgfats = avgfats, avgactive = avgactive, avgresting = avgresting, avgdietary = avgdietary, avgnet = avgnet, avgcycling = avgcycling, avgwalkingandrunning = avgwalkingandrunning)
 
 @app.route("/yesterday")
 def yesterday():
+
+    sleepchart_json = get_yesterday_sleep_chart_json()
+    foodchart_json = get_yesterday_food_chart_json()
+    caloricchart_json = get_yesterday_caloric_chart_json()
+    fitnesschart_json = get_yesterday_fitness_chart_json()
+
+    #sleep
+    sleepdata = pd.read_csv('data/Sleep Analysis.csv')
+    sleep = sleepdata[['In bed start','In bed Finish','Minutes in bed','Minutes asleep']]
+    sleep.columns = ['Inbedstart', 'InbedFinish','Minutesinbed','Minutesasleep']
+    sleep = sleep[::-1][1:2]
+
+    date = []
+    for i in sleep.InbedFinish:
+        date.append(i)
+
+    minutesinbed = sleep.Minutesinbed
+    sleep = []
+    for i in minutesinbed:
+        sleep.append(i / 60)
+
+    avgsleep = np.average(sleep)
+    avgsleep = round(avgsleep,1)
+
+    #food
+    data = pd.read_csv('data/Health Data.csv')
+    nutrition = data[['Start','Finish','Carbohydrates (mg)','Protein (g)','Sugar (g)','Total Fat (g)','Caffeine (mg)','Dietary Calories (cal)','Resting Calories (kcal)','Dietary Water (L)']]
+    nutrition = nutrition[::-1][1:2]
+    nutrition.columns = ['Start', 'Finish','Carbohydrates','Proteins','Sugar','TotalFat','Caffeine','DietaryCalories','RestingCalories','DietaryWater']
+    nutrition.Carbohydrates = nutrition.Carbohydrates * 0.001
+    carbs = nutrition.Carbohydrates.tolist()
+    proteins = nutrition.Proteins.tolist()
+    fats = nutrition.TotalFat.tolist()
+    dates = nutrition.Start.tolist()
+    carbs = carbs[::-1]
+    proteins = proteins[::-1]
+    fats = fats[::-1]
+    dates = dates[::-1]
+    avgcarbs = np.average(carbs)
+    avgcarbs = int(avgcarbs)
+    avgproteins = np.average(proteins)
+    avgproteins = int(avgproteins)
+    avgfats = np.average(fats)
+    avgfats = int(avgfats)
+
+    #caloric
+    data = pd.read_csv('data/Health Data.csv')
+    calories = data[['Start','Finish','Active Calories (kcal)','Resting Calories (kcal)','Dietary Calories (cal)']]
+    calories = calories[::-1][1:2]
+    calories.columns = ['Start','Finish','ActiveCalories','RestingCalories','DietaryCalories']
+    calories.DietaryCalories = calories.DietaryCalories * 0.001
+    calories['Net'] = calories['DietaryCalories'] - (calories['ActiveCalories'] + calories['RestingCalories'] )
+    active = calories.ActiveCalories[::-1].tolist()
+    resting = calories.RestingCalories[::-1].tolist()
+    dietary = calories.DietaryCalories[::-1].tolist()
+    net = calories.Net[::-1].tolist()
+    dates = calories.Start[::-1].tolist()
+
+    avgactive = int(np.average(active))
+    avgresting = int(np.average(resting))
+    avgdietary = int(np.average(dietary))
+    avgnet = int(np.average(net))
+
+    #fitness
+    data = pd.read_csv('data/Health Data.csv')
+    fitness = data[['Start','Cycling Distance (mi)','Distance (mi)','Steps (count)']]
+    fitness = fitness[::-1][1:2]
+    fitness.columns = ['Start', 'Cycling','WalkingandRunning','Steps']
+    avgcycling = np.average(fitness.Cycling)
+    avgcycling = round(avgcycling,2)
+    avgwalkingandrunning = np.average(fitness.WalkingandRunning)
+    avgwalkingandrunning = round(avgwalkingandrunning,2)
+
+    return render_template("yesterday.html", sleepchart_json=sleepchart_json,foodchart_json=foodchart_json,caloricchart_json=caloricchart_json,fitnesschart_json=fitnesschart_json, avgsleep = avgsleep, avgcarbs = avgcarbs,avgproteins = avgproteins, avgfats = avgfats, avgactive = avgactive, avgresting = avgresting, avgdietary = avgdietary, avgnet = avgnet, avgcycling = avgcycling, avgwalkingandrunning = avgwalkingandrunning)
+
+#def old yesterday():
 
     sleepchart_json = get_yesterday_sleep_chart_json()
     foodchart_json = get_yesterday_food_chart_json()
@@ -645,6 +727,7 @@ def week():
         sleep.append(i / 60)
 
     avgsleep = np.average(sleep)
+    avgsleep = round(avgsleep,1)
 
     #food
     data = pd.read_csv('data/Health Data.csv')
@@ -661,8 +744,11 @@ def week():
     fats = fats[::-1]
     dates = dates[::-1]
     avgcarbs = np.average(carbs)
+    avgcarbs = int(avgcarbs)
     avgproteins = np.average(proteins)
+    avgproteins = int(avgproteins)
     avgfats = np.average(fats)
+    avgfats = int(avgfats)
 
     #caloric
     data = pd.read_csv('data/Health Data.csv')
@@ -677,10 +763,10 @@ def week():
     net = calories.Net[::-1].tolist()
     dates = calories.Start[::-1].tolist()
 
-    avgactive = np.average(active)
-    avgresting = np.average(resting)
-    avgdietary = np.average(dietary)
-    avgnet = np.average(net)
+    avgactive = int(np.average(active))
+    avgresting = int(np.average(resting))
+    avgdietary = int(np.average(dietary))
+    avgnet = int(np.average(net))
 
     #fitness
     data = pd.read_csv('data/Health Data.csv')
@@ -688,7 +774,9 @@ def week():
     fitness = fitness[::-1].head(7)
     fitness.columns = ['Start', 'Cycling','WalkingandRunning','Steps']
     avgcycling = np.average(fitness.Cycling)
+    avgcycling = round(avgcycling,2)
     avgwalkingandrunning = np.average(fitness.WalkingandRunning)
+    avgwalkingandrunning = round(avgwalkingandrunning,2)
 
     return render_template("week.html", sleepchart_json=sleepchart_json,foodchart_json=foodchart_json,caloricchart_json=caloricchart_json,fitnesschart_json=fitnesschart_json, avgsleep = avgsleep, avgcarbs = avgcarbs,avgproteins = avgcarbs, avgfats = avgfats, avgactive = avgactive, avgresting = avgresting, avgdietary = avgdietary, avgnet = avgnet, avgcycling = avgcycling, avgwalkingandrunning = avgwalkingandrunning)
 
@@ -704,7 +792,7 @@ def month():
     sleepdata = pd.read_csv('data/Sleep Analysis.csv')
     sleep = sleepdata[['In bed start','In bed Finish','Minutes in bed','Minutes asleep']]
     sleep.columns = ['Inbedstart', 'InbedFinish','Minutesinbed','Minutesasleep']
-    sleep = sleep[::-1].head(30)
+    sleep = sleep[::-1].head(31)
 
     date = []
     for i in sleep.InbedFinish:
@@ -716,11 +804,12 @@ def month():
         sleep.append(i / 60)
 
     avgsleep = np.average(sleep)
+    avgsleep = round(avgsleep,1)
 
     #food
     data = pd.read_csv('data/Health Data.csv')
     nutrition = data[['Start','Finish','Carbohydrates (mg)','Protein (g)','Sugar (g)','Total Fat (g)','Caffeine (mg)','Dietary Calories (cal)','Resting Calories (kcal)','Dietary Water (L)']]
-    nutrition = nutrition[::-1].head(30)
+    nutrition = nutrition[::-1].head(31)
     nutrition.columns = ['Start', 'Finish','Carbohydrates','Proteins','Sugar','TotalFat','Caffeine','DietaryCalories','RestingCalories','DietaryWater']
     nutrition.Carbohydrates = nutrition.Carbohydrates * 0.001
     carbs = nutrition.Carbohydrates.tolist()
@@ -732,13 +821,16 @@ def month():
     fats = fats[::-1]
     dates = dates[::-1]
     avgcarbs = np.average(carbs)
+    avgcarbs = int(avgcarbs)
     avgproteins = np.average(proteins)
+    avgproteins = int(avgproteins)
     avgfats = np.average(fats)
+    avgfats = int(avgfats)
 
     #caloric
     data = pd.read_csv('data/Health Data.csv')
     calories = data[['Start','Finish','Active Calories (kcal)','Resting Calories (kcal)','Dietary Calories (cal)']]
-    calories = calories[::-1].head(30)
+    calories = calories[::-1].head(31)
     calories.columns = ['Start','Finish','ActiveCalories','RestingCalories','DietaryCalories']
     calories.DietaryCalories = calories.DietaryCalories * 0.001
     calories['Net'] = calories['DietaryCalories'] - (calories['ActiveCalories'] + calories['RestingCalories'] )
@@ -748,18 +840,20 @@ def month():
     net = calories.Net[::-1].tolist()
     dates = calories.Start[::-1].tolist()
 
-    avgactive = np.average(active)
-    avgresting = np.average(resting)
-    avgdietary = np.average(dietary)
-    avgnet = np.average(net)
+    avgactive = int(np.average(active))
+    avgresting = int(np.average(resting))
+    avgdietary = int(np.average(dietary))
+    avgnet = int(np.average(net))
 
     #fitness
     data = pd.read_csv('data/Health Data.csv')
     fitness = data[['Start','Cycling Distance (mi)','Distance (mi)','Steps (count)']]
-    fitness = fitness[::-1].head(30)
+    fitness = fitness[::-1].head(31)
     fitness.columns = ['Start', 'Cycling','WalkingandRunning','Steps']
     avgcycling = np.average(fitness.Cycling)
+    avgcycling = round(avgcycling,2)
     avgwalkingandrunning = np.average(fitness.WalkingandRunning)
+    avgwalkingandrunning = round(avgwalkingandrunning,2)
 
     return render_template("month.html", sleepchart_json=sleepchart_json,foodchart_json=foodchart_json,caloricchart_json=caloricchart_json,fitnesschart_json=fitnesschart_json, avgsleep = avgsleep, avgcarbs = avgcarbs,avgproteins = avgcarbs, avgfats = avgfats, avgactive = avgactive, avgresting = avgresting, avgdietary = avgdietary, avgnet = avgnet, avgcycling = avgcycling, avgwalkingandrunning = avgwalkingandrunning)
 

@@ -8,44 +8,37 @@
   <script src="/static/js/d3.min.js"></script>
 </head>
 
-<div class = "navbar">
-  <h1>Quantified Chase</h1>
-</div>
 
-<div class = "aboutbar">
-<button class = "aboutbutton"><a href="http://127.0.0.1:5000/about">About</a></button>
-</div>
-<div class = "navbar">
 
+
+<div class = "title">
+<h1><a href="http://127.0.0.1:5000/" style="color: black; text-decoration: none;">Quantified Chase</a></h1>
+<div>
+
+<div class = "navbar">
+<button class = "button"><a href="http://127.0.0.1:5000/about">About</a></button>
 <button class = "button"><a href="http://127.0.0.1:5000/">Today</a></button>
 <button class = "button"><a href="http://127.0.0.1:5000/yesterday">Yesterday</a></button>
 <button class = "button"><a href="http://127.0.0.1:5000/week">Week</a></button>
 <button class = "button"><a href="http://127.0.0.1:5000/month">Month</a></button>
-
 </div>
 
 
 
 <style>
-.aboutbar {
+
+.title {
   text-align: center;
+  font-size: 32px;
+  font-family: Helvetica;
 }
 
 .navbar {
   text-align: center;
+  font-family: Helvetica;
+  font-size: 28px;
 }
 
-.aboutbutton {
-    border-radius: 12px;
-    background-color: white; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 10px;
-}
 
 .button {
     border-radius: 12px;
@@ -56,8 +49,38 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 24px;
+    font-family: Helvetica;
 }
+.numbers {
+  text-align: center;
+  font-size: 25px;
+}
+.subnumbers{
+  font-size: 16px;
+  text-align: center;
+}
+.sleep{
+  font-size: 50px;
+  text-align: center;
+  color: #5856d6;
+}
+.food{
+  font-size: 50px;
+  text-align: center;
+  color: #4cd964;
+}
+.energy{
+  font-size: 50px;
+  text-align: center;
+  color: #ffcc00;
+}
+.fitness{
+  font-size: 50px;
+  text-align: center;
+  color: #ff9500;
+}
+
 
 </style>
 
@@ -66,20 +89,22 @@
 
 <body>
 
-
-  <h3>Sleep:</h3>
-  <p>{{ avgsleep }}</p>
+  <div class = "sleep">
+  <h3>Sleep</h3></div>
+  <div class = "numbers"><p>{{ avgsleep }}</p></div>
+  <div class = "subnumbers"><p>hours on average</p></div>
   <div id='sleep_chart_div'></div>
     <script type="text/javascript">
         c3.generate({{sleepchart_json|safe}})
     </script>
 
 
-
-    <h3>Food:</h3>
-    <p>Carbs: {{ avgcarbs }}</p>
-    <p>Proteins: {{ avgproteins }}</p>
-    <p>Fats: {{ avgfats }}</p>
+    <div class = "food">
+    <h3>Food</h3></div>
+    <div class = "numbers"><p>Carbs: {{ avgcarbs }}</p></div>
+    <div class = "numbers"><p>Proteins: {{ avgproteins }}</p></div>
+    <div class = "numbers"><p>Fats: {{ avgfats }}</p></div>
+    <div class = "subnumbers"><p>grams on average</p></div>
     <div id='food_chart_div'></div>
       <script type="text/javascript">
           c3.generate({{foodchart_json|safe}})
@@ -87,21 +112,23 @@
 
 
 
-
-    <h3>Energy:</h3>
-    <p>Active: {{ avgactive }}</p>
-    <p>Resting: {{ avgresting }}</p>
-    <p>Dietary: {{ avgdietary }}</p>
-    <p>Net: {{ avgnet }}</p>
+    <div class = "energy">
+    <h3>Energy</h3></div>
+    <div class = "numbers"><p>Active: {{ avgactive }}</p></div>
+    <div class = "numbers"><p>Resting: {{ avgresting }}</p></div>
+    <div class = "numbers"><p>Dietary: {{ avgdietary }}</p></div>
+    <div class = "numbers"><p>Net: {{ avgnet }}</p></div>
+    <div class = "subnumbers"><p>kcal on average</p></div>
     <div id='caloric_chart_div'></div>
       <script type="text/javascript">
           c3.generate({{caloricchart_json|safe}})
       </script>
 
-
-    <h3>Fitness:</h3>
-    <p>Cycling: {{ avgcycling }}</p>
-    <p>Walking and Running: {{ avgwalkingandrunning }}</p>
+    <div class = "fitness">
+    <h3>Fitness</h3></div>
+    <div class = "numbers"><p>Cycling: {{ avgcycling }}</p></div>
+    <div class = "numbers"><p>Walking and Running: {{ avgwalkingandrunning }}</p></div>
+    <div class = "subnumbers"><p>miles on average</p></div>
     <div id='fitness_chart_div'></div>
       <script type="text/javascript">
           c3.generate({{fitnesschart_json|safe}})
