@@ -1,17 +1,40 @@
 <!DOCTYPE html>
-<html>
-<title>About</title>
+<html lang="en">
 
+<head>
+  <title>Quantified Chase</title>
+  <link rel="stylesheet" href="/static/css/c3.min.css">
+  <script src="/static/js/c3.min.js"></script>
+  <script src="/static/js/d3.min.js"></script>
+</head>
+
+<div class = "navbar">
+  <h1>Quantified Chase</h1>
+</div>
 
 <div class = "aboutbar">
-<h1><a href="http://127.0.0.1:5000/" style="color: black; text-decoration: none;">Quantified Chase</a></h1>
-<button class = "aboutbutton"><a href="http://127.0.0.1:5000/about" style="color: black; text-decoration: none;">About</a></button>
+<button class = "aboutbutton"><a href="http://127.0.0.1:5000/about">About</a></button>
 </div>
+<div class = "navbar">
+
+<button class = "button"><a href="http://127.0.0.1:5000/">Today</a></button>
+<button class = "button"><a href="http://127.0.0.1:5000/yesterday">Yesterday</a></button>
+<button class = "button"><a href="http://127.0.0.1:5000/week">Week</a></button>
+<button class = "button"><a href="http://127.0.0.1:5000/month">Month</a></button>
+
+</div>
+
+
 
 <style>
 .aboutbar {
   text-align: center;
 }
+
+.navbar {
+  text-align: center;
+}
+
 .aboutbutton {
     border-radius: 12px;
     background-color: white; /* Green */
@@ -22,6 +45,18 @@
     text-decoration: none;
     display: inline-block;
     font-size: 10px;
+}
+
+.button {
+    border-radius: 12px;
+    background-color: white; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 </style>
 
