@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Quantified Chase</title>
+  <link rel="stylesheet" href="/static/css/c3.min.css">
+  <script src="/static/js/c3.min.js"></script>
+  <script src="/static/js/d3.min.js"></script>
+</head>
+
+
+
+
+<div class = "title">
+<h1><a href="https://quantified-chase.herokuapp.com/" style="color: black; text-decoration: none;">Quantified Chase</a></h1>
+<div>
+
+
+<div class = "navbar">
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/about">About</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/">Today</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/yesterday">Yesterday</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/week">Week</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/month">Month</a></button>
+</div>
+
+
+
+<style>
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  font-family: Helvetica;
+}
+
+.navbar {
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 28px;
+}
+
+
+.button {
+    border-radius: 12px;
+    background-color: white; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    font-family: Helvetica;
+}
+
+.numbers {
+  text-align: center;
+  font-size: 30px;
+}
+.subnumbers{
+  font-size: 16px;
+  text-align: center;
+}
+.sleep{
+  font-size: 30px;
+  text-align: center;
+  color: #5856d6;
+}
+.food{
+  font-size: 30px;
+  text-align: center;
+  color: #4cd964;
+}
+.energy{
+  font-size: 30px;
+  text-align: center;
+  color: #ffcc00;
+}
+.fitness{
+  font-size: 30px;
+  text-align: center;
+  color: #ff9500;
+}
+
+
+
+
+</style>
+
+
+
+<body>
+
+
+    <div class = "sleep">
+    <h1>Sleep</h1></div>
+    <div class = "numbers">
+    <p>{{ avgsleep }}</p></div><div class = "subnumbers"><p> hours</p></div>
+
+
+
+    <div class = "food">
+    <h1>Food</h1></div>
+    <div class = "numbers">
+    <p>Carbohydrates: {{ avgcarbs }}</p>
+    <p>Proteins: {{ avgproteins }}</p>
+    <p>Fats: {{ avgfats }}</p>
+    </div>
+    <div class = "subnumbers"><p> grams</p></div>
+
+
+
+
+
+    <div class = "energy">
+    <h1>Energy</h1></div>
+    <div class = "numbers">
+    <p>Active Calories: {{ avgactive }}</p>
+    <p>Resting Calories: {{ avgresting }}</p>
+    <p>Dietary Calories: {{ avgdietary }}</p>
+    <p>Net Calories: {{ avgnet }}</p>
+    </div>
+    <div class = "subnumbers"><p> kcal</p></div>
+
+
+    <div class = "fitness">
+    <h1>Fitness</h1></div>
+    <div class = "numbers">
+    <p>Cycling: {{ avgcycling }}</p>
+    <p>Walking and Running: {{ avgwalkingandrunning }}</p>
+    <div class = "subnumbers"><p> miles</p></div>
+
+
+</body>
+
+</html>
