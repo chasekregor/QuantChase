@@ -12,15 +12,15 @@
 
 
 <div class = "title">
-<h1><a href="http://127.0.0.1:5000/" style="color: black; text-decoration: none;">Quantified Chase</a></h1>
+<h1><a href="https://quantified-chase.herokuapp.com/" style="color: black; text-decoration: none;">Quantified Chase</a></h1>
 <div>
 
 <div class = "navbar">
-<button class = "button"><a href="http://127.0.0.1:5000/about">About</a></button>
-<button class = "button"><a href="http://127.0.0.1:5000/">Today</a></button>
-<button class = "button"><a href="http://127.0.0.1:5000/yesterday">Yesterday</a></button>
-<button class = "button"><a href="http://127.0.0.1:5000/week">Week</a></button>
-<button class = "button"><a href="http://127.0.0.1:5000/month">Month</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/about">About</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/">Today</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/yesterday">Yesterday</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/week">Week</a></button>
+<button class = "button"><a href="https://quantified-chase.herokuapp.com/month">Month</a></button>
 </div>
 
 
@@ -61,32 +61,42 @@
 
 <body>
   <div class = "aboutbody">
+
   <h3>Creator:</h3>
-  <p>Chase Kregor</p>
+    <p>Chase Kregor</p>
   <h3>Goal:</h3>
-  <p>The goal of Quantified Chase was to create a dashboard of my life.</p>
-  <h3>Background:</h3>
-  <p>Quantified Chase was insipired by the Quantified Self movement. Upon buying an apple watch, I started to fall
-    in love with the Health App, now that I had an Apple Watch I was feeding it all this
-    interesting data about myself 24/7.
-     I wondered if there was a way I could share all this data other people? This made me think about
-     all the other various platforms that contained data about myself.
-     And so I created Quantified Chase for three reasons:
-     <ul>
-       <li>Display my data to others for accountability</li>
-       <li>Aggregate all my data for information gain</li>
-       <li>A fun data science project</li>
-     </ul>
-  </p>
-  <h3>Data:</h3>
-  <p>The data comes directly from my HealthKit.</p>
-  <p>Disclaimer: Please don't do anything innapropriate with my data.</p>
+  <li><p><b>Primary:</b> Create a dashboard of my life for information gain.</p>
+  <li><p><i>Secondary:</i> Display my data to the public as motivation & accountability to improve various aspects of my life.</p>
+  <li><p><i>Secondary:</i> Have fun creating an interesting data science project about myself.</p>
+
+  <h3>Story:</h3>
+    <p><a href="http://chasekregor.com/making-quantified-chase">http://chasekregor.com/making-quantified-chase</a></p>
+
+
   <h3>How Quantified Chase Works:</h3>
-  <p>Healthkit -> QSAccess App -> Flask App -> Heroku </p>
-  <h3>Next Steps & Future Work:</h3>
+    <p>I used a variety of IOS applications that have HealthKit integration to track various data points about my life. Those IOS applications automatically import them into my Health app. I then use the QS Access App to export my data out of my Health app into a CSV. Next, I airdrop the CSV from my phone, onto my computer, and into the flask app that built this website. Flask is a popular webframework that helps you build web applications in python. I then deploy that web application using Heroku onto the internet, turning it into a website people can access.</p>
+
+  <h3>Data:</h3>
+
+    <b><h5>Sleep:</h5></b><p>I track my sleep using my Iphone clock's In Bed functionality. Unfortunately the apple watch can't track sleep yet.</p>
+
+    <b><h5>Food:</h5></b>
+      <p>I track my food using myfitnesspal. I am sure there are some innacuracies and the occasional day where I forget to log my food but I really try to be as accurate as possible.</p>
+
+    <b><h5>Energy:</h5></b>
+      <p>I track my active and resting calories from my apple watch. It is constantly reading my heart rate throughout the day which is a relatively good measure.</p>
+      <p>The dietary energy is simply the amount of kcals I consume a day from food. I calculate this number from myfitnesspal.</p>
+      <p>The net kcal is calculated by taking the amount of food I have consumed in a day minus the amount of calories I have burned (both active and resting). </p>
+
+    <b><h5>Fitness:</h5></b>
+        <p>I use strava on my apple watch to input my workouts into the health app.</p>
+
+  
   </div>
 
 </body>
+
+
 
 
 </html>

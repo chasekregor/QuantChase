@@ -554,7 +554,7 @@ def today():
     avgwalkingandrunning = np.average(fitness.WalkingandRunning)
     avgwalkingandrunning = round(avgwalkingandrunning,2)
 
-    return render_template("today.html", sleepchart_json=sleepchart_json,foodchart_json=foodchart_json,caloricchart_json=caloricchart_json,fitnesschart_json=fitnesschart_json, avgsleep = avgsleep, avgcarbs = avgcarbs,avgproteins = avgproteins, avgfats = avgfats, avgactive = avgactive, avgresting = avgresting, avgdietary = avgdietary, avgnet = avgnet, avgcycling = avgcycling, avgwalkingandrunning = avgwalkingandrunning)
+    return render_template("index.html", sleepchart_json=sleepchart_json,foodchart_json=foodchart_json,caloricchart_json=caloricchart_json,fitnesschart_json=fitnesschart_json, avgsleep = avgsleep, avgcarbs = avgcarbs,avgproteins = avgproteins, avgfats = avgfats, avgactive = avgactive, avgresting = avgresting, avgdietary = avgdietary, avgnet = avgnet, avgcycling = avgcycling, avgwalkingandrunning = avgwalkingandrunning)
 
 @app.route("/yesterday")
 def yesterday():
